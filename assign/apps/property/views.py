@@ -23,7 +23,6 @@ def upload(model_name, file,app_label):
                 m.full_clean()
                 m.save()
         except ValidationError as e:
-            print(e)
             rows_with_error.append(i + 1)
     f.close()
 
