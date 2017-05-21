@@ -22,6 +22,9 @@ def upload(model_name, file,app_label):
                 m = model_name(**row)
                 m.full_clean()
                 m.save()
+                print("{} record created".format(i+1))
+            else:
+                print("{} record updated".format(i+1))
         except ValidationError as e:
             print(e)
             rows_with_error.append(i + 1)
@@ -29,6 +32,7 @@ def upload(model_name, file,app_label):
 
 
 def download():
+    #joined = Prop.objects.all().extra(tables=["property_location"], where=["project = p_name OR alias LIKE '%' || project || '%'"])
     cursor = connection.cursor()
     cursor.execute(" SELECT * from property_prop INNER JOIN property_location ON property_prop.project = property_location.p_name OR \
                    property_location.alias LIKE '%' || property_prop.project || '%' ")
@@ -41,6 +45,5 @@ def download():
     for line in rows:
         writer.writerow(line)
     f.close()
-
 
 
