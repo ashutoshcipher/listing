@@ -26,7 +26,6 @@ def upload(model_name, file,app_label):
             else:
                 print("{} record updated".format(i+1))
         except ValidationError as e:
-            print(e)
             rows_with_error.append(i + 1)
     f.close()
 
