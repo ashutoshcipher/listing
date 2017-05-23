@@ -1,5 +1,10 @@
 from django.db import models
 
+
+class City(models.Model):
+    name = models.CharField(max_length=100, null=True, blank=True)
+
+
 # Create your models here.`_id` int(11) NOT NULL AUTO_INCREMENT,
 class Location(models.Model):
     id = models.IntegerField(null=False, blank=False, primary_key=True)
@@ -37,6 +42,7 @@ class Location(models.Model):
     map_placeid = models.CharField(max_length=500, null=True, blank=True)
     map_formatted_address = models.CharField(max_length=1000, null=True, blank=True)
     map_types = models.CharField(max_length=1000, null=True, blank=True)
+    cityf = models.ForeignKey(City, null = True, blank = True)
 
     def __str__(self):
         return "{}".format(self.id)
@@ -113,6 +119,7 @@ class Prop(models.Model):
     rate_sqft = models.FloatField(null=True, blank=True)
     is_parent = models.CharField(max_length=5, null=True, blank=True)
     property_type_norm = models.CharField(null = True, blank = True, max_length=50)
+    location = models.ForeignKey(Location, null = True, blank = True)
 
     def __str__(self):
         return "{}".format(self.id)
