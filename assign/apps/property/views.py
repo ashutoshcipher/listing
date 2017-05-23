@@ -67,7 +67,6 @@ def uploadProp(model_name, file,app_label):
                 location = Location.objects.filter(Q(p_name__icontains = row['project']) | Q(alias__icontains = row['project']))
                 if location:
                     m.location = location[0]
-                print(m.location)
                 m.full_clean()
                 m.save()
                 print("{} record created".format(i+1))
@@ -90,7 +89,6 @@ def uploadLocation(model_name, file,app_label):
 
     rows_with_error = []
     for i, row in enumerate(dict_list):
-        print(row)
         try:
             check_row = model_name.objects.filter(id = row['id']).update(**row)
             if check_row <=0:
